@@ -1,0 +1,58 @@
+---
+title: "Example exercises 1B"
+subtitle: "intro2r flipped workshop"
+author: "John Little"
+date: "`r Sys.Date()`"
+output: html_notebook
+---
+
+**very quick visualization and EDA**
+
+These exercises supplement the first part of the [flipped workshop _Introduction to R_](https://rfun.library.duke.edu/).  The workshop is in two parts
+
+- Part 1: getting started, EDA, data wrangling
+- Part 2: visualization, pivot, join, regression
+
+The [YouTube playlist of all the videos](https://www.youtube.com/playlist?list=PLIUcX1JrVUNWBUl4Cwu8psxxDVZCvrJHk) is publicly available under a CC-BY license
+
+Beyond the exercises included in this repository, the workshop code base is here:  https://github.com/libjohn/rfun_flipped 
+
+## Load library packages
+
+```{r}
+library(tidyverse)
+library(gapminder)
+library(skimr)
+```
+
+## Data
+
+The data are from the dplyr::starwars dataset consisting of information about _Star Wars_ characters
+
+```{r}
+glimpse(starwars)
+```
+
+## Scatterplot
+
+```
+ggplot(data = some_tibble, aes(x =, y =)) +
+  geom_somefunction()
+```
+
+Make a scatter plot from the `starwars` tibble using `ggplot2::geom_point()`.  Use `height` as the predictor variable and `mass` as the response variable.  Limit the results to characters with a mass less than 500 Kg.
+
+```{r}
+
+```
+
+###  EDA
+
+Use the `skimr` library package to `skim` the gapminder tibble
+
+```{r}
+
+```
+
+
+
