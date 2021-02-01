@@ -1,0 +1,129 @@
+---
+title: "02 Vizualization - part A"
+author: "John Little"
+date: "`r Sys.Date()`"
+#output: html_notebook
+---
+
+## Load library Packages
+
+```{r}
+library(tidyverse)
+# library(gapminder)
+```
+
+
+## data
+
+These exercisees use the following [`ggplot2` training datasets](https://ggplot2.tidyverse.org/reference/index.html#section-data)
+
+- ggplot2::mpg
+- ggplot2::midwest
+- ggplot2::economics_long
+
+
+## Scatter plot
+
+a. Starting the the `mpg` dataset, Make a scatterplot using displacement (`disp`) as the predictor value on the x axis and highway mpg (`hwy`) as the response variable.
+b. Color each variable by the type of car (`class`)
+c. Add a regression line for each type of car
+
+
+```{r}
+mpg %>% 
+  ggplot(aes(displ, hwy)) +
+  geom_point() + #aes(color = class)) +
+  geom_smooth() #+
+  # geom_smooth(aes(group = class, color = class), se = FALSE)
+```
+
+
+
+```{r}
+mpg %>% 
+  ggplot(aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(aes(group = class, color = class),  se = FALSE, method = lm)
+```
+
+## Bar plots
+
+a. Using the `ggplot::midwest` dataset, display a barplot of each category showing the categorical frequency
+b. Arrange the bars in order from most frequent to least
+c. Make the plot a stacked bar chart, stacked by state
+
+### geom_bar()
+
+```{r}
+midwest %>% 
+  ggplot() +
+  geom_bar(aes(category))
+```
+
+
+```{r}
+midwest %>% 
+  ggplot() +
+  geom_bar(aes(fct_infreq(category), fill = state)) 
+```
+
+### geom_col()
+
+a. In `geom_col` the height of the bars represent values in the data
+b. Make a bar plot showing the total population in each state.  One way to do this is to use `dplyr` functions learned in part 1 of the _flipped_ series
+c. Arrange the bars in descending order of frequency.  Using one of the `scales_` functions, affect the scale to be a more human readable label with commas
+
+```{r}
+midwest %>% 
+  group_by(state) %>% 
+  summarise(state_pop = sum(poptotal)) %>% 
+  ggplot(aes(state, state_pop)) +
+  geom_col()
+```
+
+
+```{r}
+midwest %>% 
+  group_by(state) %>%
+  summarise(state_pop = sum(poptotal)) %>% 
+  ggplot(aes(fct_rev(fct_reorder(state, state_pop)), state_pop)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::comma)
+```
+## geom_line
+
+a.  Using the `ggplot2::economics_long` dataset, draw a time-series line plot of the various values in the tibble.  Use the `group` argument to 
+b.  Improve the plot by adding colors to each line.
+c.  Eliminate the `pop` variable and show the remaining four variables in a faceted view with `facet_wrap()`
+
+```{r}
+economics_long %>% 
+  ggplot(aes(date, value)) +
+  geom_line(aes(group = variable))
+```
+
+
+```{r}
+economics_long %>% 
+  filter(variable != "pop") %>% 
+  ggplot(aes(date, value)) +
+  geom_line(aes(color = variable)) +
+  facet_wrap(~ variable)
+```
+
+## Interactive Plots
+
+```{r}
+library(plotly)
+```
+
+```{r}
+interactive_barplot <- midwest %>% 
+  ggplot() +
+  geom_bar(aes(fct_infreq(category), fill = state)) 
+
+interactive_barplot
+
+ggplotly(interactive_barplot)
+```
+

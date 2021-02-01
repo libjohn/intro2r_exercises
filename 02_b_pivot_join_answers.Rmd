@@ -1,0 +1,69 @@
+---
+title: "02 pivot and join - part B"
+author: "John Little"
+date: "`r Sys.Date()`"
+#output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+## data
+
+These exercisees use the following [`ggplot2` training datasets](https://ggplot2.tidyverse.org/reference/index.html#section-data)
+
+-   dplyr::starwars
+-   Data from fivethrityeight.org
+-   ggplot2::economics
+-   ggplot2::economics_long
+
+## Join
+
+There are a series of [join commands](https://dplyr.tidyverse.org/reference/index.html#section-two-table-verbs)
+
+-   left_join, inner_join, right_join, full_join,
+-   semi_join, anti_join
+
+First let's read in the favorability ratings data from fivethirtyeight.com
+
+```{r}
+fav_ratings <- read_csv("data/538_favorability_popularity.csv", skip = 11)
+fav_ratings
+```
+
+Join on a key that is common across two data frames. For best results use a numeric key that promotes precision. Of course, we're going to use a alphabetic key, `name`, which will highlight what can go wrong and introduce troubleshooting strategies.
+
+Anyway, in this case, the key will be the `name` variable that is common to both tables. We're using the `fav_ratings` tibble and the `starwars` tibble.
+
+```{r}
+fav_ratings %>% 
+  # left_join(starwars, by = c("name" = "name"))
+  left_join(starwars)  %>% 
+  arrange(desc(fav_rating))
+```
+
+```{r}
+anti_join(fav_ratings, starwars) %>% arrange(name)
+anti_join(starwars, fav_ratings) %>% arrange(name)
+```
+
+```{r}
+starwars %>% 
+  filter(str_detect(name, regex("3p|palpatine|obi|amidala|leia|d2", ignore_case = TRUE))) %>% 
+  arrange(name)
+```
+
+## Pivot
+
+```{r}
+economics
+economics_long %>% arrange(date)
+```
+
+```{r}
+economics %>% 
+  pivot_longer(pce:unemploy, names_to = "variable", values_to = "value") 
+```
+
+
