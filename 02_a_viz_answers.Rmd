@@ -26,7 +26,7 @@ These exercisees use the following [`ggplot2` training datasets](https://ggplot2
 
 Starting with the `mpg` dataset, 
 
-a. Make a scatterplot using displacement (`disp`) as the predictor value on the x axis and highway mpg (`hwy`) as the response variable.
+a. Make a scatter plot using displacement (`displ`) as the predictor value on the x axis and highway mpg (`hwy`) as the response variable.
 b. Color each variable by the type of car (`class`)
 c. Add a regression line for each type of car
 
