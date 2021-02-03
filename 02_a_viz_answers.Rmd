@@ -69,9 +69,10 @@ midwest %>%
 
 ### geom_col()
 
-a. In `geom_col` the height of the bars represent values in the data
-b. Make a bar plot showing the total population in each state.  One way to do this is to use `dplyr` functions learned in part 1 of the _flipped_ series
-c. Arrange the bars in descending order of frequency.  Using one of the `scales_` functions, affect the scale to be a more human readable label with commas
+With the `geom_col` function, the height of the bars represent values in the data
+
+a. Make a bar plot showing the total population in each state.  One way to do this is to use `dplyr` functions learned in part 1 of the _flipped_ series
+b. Arrange the bars in descending order of frequency.  Using one of the `scales_` functions, affect the scale to be a more human readable label with commas
 
 ```{r}
 midwest %>% 
@@ -92,21 +93,23 @@ midwest %>%
 ```
 ## geom_line
 
-a.  Using the `ggplot2::economics_long` dataset, draw a time-series line plot of the various values in the tibble.  Use the `group` argument to 
+Using the `ggplot2::economics_long` dataset
+
+a.  Draw a time-series line plot of the various values in the tibble.  Use the `group` argument 
 b.  Improve the plot by adding colors to each line.
 c.  Eliminate the `pop` variable and show the remaining four variables in a faceted view with `facet_wrap()`
 
 ```{r}
 economics_long %>% 
   ggplot(aes(date, value)) +
-  geom_line(aes(group = variable))
+  geom_line(aes(color = variable))
 ```
 
 
 ```{r}
 economics_long %>% 
   filter(variable != "pop") %>% 
-  ggplot(aes(date, value)) +
+  ggplot(aes(date, value)) + 
   geom_line(aes(color = variable)) +
   facet_wrap(~ variable)
 ```
