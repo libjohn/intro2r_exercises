@@ -33,10 +33,9 @@ c. Add a regression line for each type of car
 
 ```{r}
 mpg %>% 
-  ggplot(aes(displ, hwy)) +
-  geom_point() + #aes(color = class)) +
-  geom_smooth() #+
-  # geom_smooth(aes(group = class, color = class), se = FALSE)
+  ggplot(aes(___, ___)) +
+  geom_point(aes(color = ___)) + 
+  geom_-----(aes(group = ___)) 
 ```
 
 
@@ -59,14 +58,14 @@ c. Make the plot a stacked bar chart, stacked by state
 ```{r}
 midwest %>% 
   ggplot() +
-  geom_bar(aes(category))
+  geom_bar(aes(____))
 ```
 
 
 ```{r}
 midwest %>% 
   ggplot() +
-  geom_bar(aes(fct_infreq(category), fill = state)) 
+  geom_bar(aes(fct_-------(_______), fill = ______)) 
 ```
 
 ### geom_col()
@@ -78,9 +77,9 @@ b. Arrange the bars in descending order of frequency.  Using one of the `scales_
 
 ```{r}
 midwest %>% 
-  group_by(state) %>% 
-  summarise(state_pop = sum(poptotal)) %>% 
-  ggplot(aes(state, state_pop)) +
+  group_by(______) %>% 
+  summarise(state_pop = sum(_______)) %>% 
+  ggplot(aes(_____, _____)) +
   geom_col()
 ```
 
@@ -103,8 +102,8 @@ c.  Eliminate the `pop` variable and show the remaining four variables in a face
 
 ```{r}
 economics_long %>% 
-  ggplot(aes(date, value)) +
-  geom_line(aes(color = variable))
+  ggplot(aes(_____, _____)) +
+  geom_line(aes(color = _____))
 ```
 
 
@@ -113,7 +112,7 @@ economics_long %>%
   filter(variable != "pop") %>% 
   ggplot(aes(date, value)) + 
   geom_line(aes(color = variable)) +
-  facet_wrap(~ variable)
+  facet_wrap(~ _______)
 ```
 
 ## Interactive Plots
