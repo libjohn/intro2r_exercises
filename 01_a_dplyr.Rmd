@@ -42,7 +42,7 @@ glimpse(gapminder)
 
 ### select
 
-Subset the gapminder tibble (data frame) by columns.  Display only the `year` and the `population` columns.  
+Subset the gapminder tibble (data frame) by columns.  Display only the `year` and the population (aka `pop`) columns.  
 
 ```{r}
 gapminder 
