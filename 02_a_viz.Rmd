@@ -41,7 +41,7 @@ mpg %>%
 
 ## Bar plots
 
-a. Using the `ggplot::midwest` dataset, display a barplot of each category showing the categorical frequency
+a. Using the `ggplot::midwest` dataset, display a barplot of each `category` showing the categorical frequency
 b. Arrange the bars in order from most frequent to least
 c. Make the plot a stacked bar chart, stacked by state
 
