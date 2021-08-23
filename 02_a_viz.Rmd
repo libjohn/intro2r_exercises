@@ -39,14 +39,6 @@ mpg %>%
 ```
 
 
-
-```{r}
-mpg %>% 
-  ggplot(aes(displ, hwy)) +
-  geom_point(aes(color = class)) +
-  geom_smooth(aes(group = class, color = class),  se = FALSE, method = lm)
-```
-
 ## Bar plots
 
 a. Using the `ggplot::midwest` dataset, display a barplot of each category showing the categorical frequency
@@ -84,14 +76,6 @@ midwest %>%
 ```
 
 
-```{r}
-midwest %>% 
-  group_by(state) %>%
-  summarise(state_pop = sum(poptotal)) %>% 
-  ggplot(aes(fct_rev(fct_reorder(state, state_pop)), state_pop)) +
-  geom_col() +
-  scale_y_continuous(labels = scales::comma)
-```
 ## geom_line
 
 Using the `ggplot2::economics_long` dataset
